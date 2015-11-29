@@ -14,25 +14,33 @@ class FullAssociativeCache(Cache):
             words_string += " word%d" % (i + 1,)
         self._cache_block = namedtuple("cache_block", "lastUsedTime tag %s" % words_string)
 
-    #index is ignored
+    # Index isn't used here
     def isHit(self, address, index):
         address_int = int(address, 2)
         for item in self._cache:
             if item:
                 words = item[2:]
+                # Search for all words in block
                 for word in words:
                     current_address_int = int(word, 2)
                     if address_int == current_address_int:
+                        # Update that block last time used parameter
                         item = self._cache_block(datetime.now().microsecond, item.tag, *words)
                         return True
+            else:
+                # If found an empty block then break no need to complete searching in empty blocks
+                break
         return False
 
+    # Index isn't used here
     def _addToCache(self, index, tag, words):
         cache_index_to_add, min_last_time_used = 0, sys.maxint
         for i, item in enumerate(self._cache):
+            # If block is empty add straight to it
             if not item:
                 cache_index_to_add = i
                 break
+            # If not continue looking for the LRU
             else:
                 if item.lastUsedTime < min_last_time_used:
                     cache_index_to_add = i
