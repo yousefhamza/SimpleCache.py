@@ -3,12 +3,12 @@ from collections import namedtuple
 from datetime import datetime
 import sys
 from texttable import Texttable
-from DirectMappingCache import DirectMappingCache
+from Cache import Cache
 
 
-class SetAssociativeCache(DirectMappingCache):
+class SetAssociativeCache(Cache):
     def __init__(self, numberOfSets, number_of_blocks, words_per_block, memory_address_size, byte_addressed=True):
-        DirectMappingCache.__init__(self, number_of_blocks, words_per_block,
+        Cache.__init__(self, number_of_blocks, words_per_block,
                                                    memory_address_size, byte_addressed=True)
         del self._cache
         self._caches = [[None] * number_of_blocks]

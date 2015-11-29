@@ -3,11 +3,11 @@ from collections import namedtuple
 from datetime import datetime
 import sys
 from texttable import Texttable
-from DirectMappingCache import DirectMappingCache
+from Cache import Cache
 
-class FullAssociativeCache(DirectMappingCache):
+class FullAssociativeCache(Cache):
     def __init__(self, number_of_blocks, words_per_block, memory_address_size, byte_addressed=True):
-        DirectMappingCache.__init__(self, number_of_blocks, words_per_block, memory_address_size, byte_addressed=True)
+        Cache.__init__(self, number_of_blocks, words_per_block, memory_address_size, byte_addressed=True)
 
         words_string = "word0"
         for i in range(words_per_block - 1):
