@@ -25,9 +25,11 @@ class SetAssociativeCache(Cache):
         address_int = int(address, 2)
         for cache in self._caches:
             if cache[index]:
-                for word in cache[index][2:]:
+                words = cache[index][2:]
+                for word in words:
                     current_address_int = int(word, 2)
                     if address_int == current_address_int:
+                        cache[index] = self._cache_block(datetime.now().microsecond, cache[index].tag, *words)
                         return True
         return False
 
@@ -44,6 +46,7 @@ class SetAssociativeCache(Cache):
         self._caches[cache_index_to_add][index] = self._cache_block(datetime.now().microsecond,
                                                    tag,
                                                    *words)
+        print self.getCacheTable()
     def getCacheTable(self):
         table_string = ""
         for cache in self._caches:

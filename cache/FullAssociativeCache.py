@@ -19,9 +19,11 @@ class FullAssociativeCache(Cache):
         address_int = int(address, 2)
         for item in self._cache:
             if item:
-                for word in item[2:]:
+                words = item[2:]
+                for word in words:
                     current_address_int = int(word, 2)
                     if address_int == current_address_int:
+                        item[index] = self._cache_block(datetime.now().microsecond, item[index].tag, *words)
                         return True
         return False
 
