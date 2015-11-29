@@ -25,7 +25,9 @@ def main():
     rows = [['Hexadecimal', 'Binary']]
     for hexAddress in hexByteAddresses:
         size = len(hexAddress) * 4
-        rows.append(['0x'+hexAddress, bin(int(hexAddress, 16))[2:].zfill(size)])
+        binary_address = bin(int(hexAddress, 16))[2:].zfill(size)
+        rows.append(['0x'+hexAddress,
+                     ' '.join([binary_address[i:i+4] for i in range(0, len(binary_address), 4)])])
 
     table.add_rows(rows)
     print table.draw()
