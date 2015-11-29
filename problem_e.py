@@ -8,7 +8,6 @@ def problem_e(cache):
     for hexAddress in hexByteAddresses:
         cache.cache(hexAddress)
 
-
 if __name__ == '__main__':
     cache = FullAssociativeCache(16, 1, 16)
     problem_e(cache)

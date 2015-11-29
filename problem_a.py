@@ -15,6 +15,8 @@ hexByteAddresses = [
     "0240",
     "00F4"
 ]
+
+
 def main():
     table = Texttable()
     table.set_deco(Texttable.HEADER)

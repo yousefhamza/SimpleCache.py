@@ -35,4 +35,3 @@ for i in range(100):
     problem_e(cache)
 print cache.getCacheTable()
 print 'miss(e): %f'% (cache.getMissRate() * 100), '%'
-
