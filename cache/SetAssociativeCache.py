@@ -46,7 +46,6 @@ class SetAssociativeCache(Cache):
         self._caches[cache_index_to_add][index] = self._cache_block(datetime.now().microsecond,
                                                    tag,
                                                    *words)
-        print self.getCacheTable()
     def getCacheTable(self):
         table_string = ""
         for cache in self._caches:
