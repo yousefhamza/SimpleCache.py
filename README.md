@@ -1,7 +1,8 @@
 ## Simple Cache Implementation in Python
 
 I wrote this just to make some very boring assignment a little bit more exciting, that
-was the assignment: (so code isn't in it's very best shape :$)
+was the assignment:
+(so code isn't in it's very best shape :$)
 ![alt tag](http://i.imgur.com/rBZVgr2.png)
 
 dependencies: [texttable](https://github.com/bufordtaylor/python-texttable)
