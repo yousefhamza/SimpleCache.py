@@ -49,7 +49,7 @@ class Cache:
         # add a variable to hold a counter used for the last recently used entry (used only for cache types that need it)
         self._last_recently_used_counter = 0;
 
-    def cache(self, address):
+    def cache(self, address, allow_print):
         """
         :param address: the address in hex decimal of type stirng
         :return: nothing
@@ -61,6 +61,8 @@ class Cache:
         if self._byte_addressed:
             base -= 2
 
+        # the word index bit (currently only used for printing purposes)
+        word_index_bit = binary_address[base - self._word_index_size: base]
         # Get a list of words contains all words in block with the right word index for each
         words = self._completeBlock(binary_address, base - self._word_index_size, base)
         base -= self._word_index_size
@@ -73,11 +75,17 @@ class Cache:
         # After the index assign the rest of the bits to tag
         tag = binary_address[:base]
 
+        #printing capture variable
+        print_status = "Miss"
         if self.isHit(binary_address, index):
             self._hits += 1
+            print_status = "Hit "
         else:
             self._misses += 1
             self._addToCache(index, tag, words)
+
+        if allow_print:
+            print "%s : %s [index: %s, tag: %s, word_index: %s]" %(address, print_status, bin(index)[2:].zfill(self._index_size), tag,  word_index_bit)
 
     @abc.abstractmethod
     def isHit(self, address, index):
