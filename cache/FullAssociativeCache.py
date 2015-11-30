@@ -25,7 +25,7 @@ class FullAssociativeCache(Cache):
                     current_address_int = int(word, 2)
                     if address_int == current_address_int:
                         # Update that block last time used parameter
-                        item = self._cache_block(datetime.now().microsecond, item.tag, *words)
+                        item = self._cache_block(self._generateRecentlyUsedCode(), item.tag, *words)
                         return True
             else:
                 # If found an empty block then break no need to complete searching in empty blocks
@@ -45,7 +45,7 @@ class FullAssociativeCache(Cache):
                 if item.lastUsedTime < min_last_time_used:
                     cache_index_to_add = i
                     min_last_time_used = item.lastUsedTime
-        self._cache[cache_index_to_add] = self._cache_block(datetime.now().microsecond,
+        self._cache[cache_index_to_add] = self._cache_block(self._generateRecentlyUsedCode(),
                                                             tag,
                                                             *words)
 

@@ -46,6 +46,9 @@ class Cache:
         self._hits = 0
         self._misses = 0
 
+        # add a variable to hold a counter used for the last recently used entry (used only for cache types that need it)
+        self._last_recently_used_counter = 0;
+
     def cache(self, address):
         """
         :param address: the address in hex decimal of type stirng
@@ -140,3 +143,13 @@ class Cache:
             currentAddress[startIndex: endIndex] = bin(i)[2:].zfill(size)
             words += [''.join(currentAddress)]
         return words
+
+
+    def _generateRecentlyUsedCode(self):
+        """
+        Get a higher recently used code and update the recently used counter.
+        :return: number
+        """
+        tmp = self._last_recently_used_counter
+        self._last_recently_used_counter += 1
+        return tmp;

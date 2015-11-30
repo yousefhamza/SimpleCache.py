@@ -14,6 +14,8 @@ class SetAssociativeCache(Cache):
         del self._cache
         # add a variables caches to hold an array of caches equal to number of sets
         self._caches = [[None] * number_of_blocks]
+        
+
         for i in range(numberOfSets -1):
             self._caches.append([None] * number_of_blocks)
 
@@ -39,7 +41,7 @@ class SetAssociativeCache(Cache):
                 word_at_index_int = int(words[word_index], 2)
                 if address_int == word_at_index_int:
                     # Update that block last time used parameter
-                    cache[index] = self._cache_block(datetime.now().microsecond, cache[index].tag, *words)
+                    cache[index] = self._cache_block(self._generateRecentlyUsedCode(), cache[index].tag, *words)
                     return True
         return False
 
@@ -55,7 +57,7 @@ class SetAssociativeCache(Cache):
                 if cache[index].lastUsedTime < min_last_time_used:
                     cache_index_to_add = i
                     min_last_time_used = cache[index].lastUsedTime
-        self._caches[cache_index_to_add][index] = self._cache_block(datetime.now().microsecond,
+        self._caches[cache_index_to_add][index] = self._cache_block(self._generateRecentlyUsedCode(),
                                                    tag,
                                                    *words)
     def getCacheTable(self):
